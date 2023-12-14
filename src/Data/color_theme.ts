@@ -5,8 +5,13 @@ export type subThemes = {
   black?: string;
   primary: string;
   primaryHover: string;
-  dark: string;
-  darkHover: string;
+  primaryDark: string;
+  primaryDarkHover: string;
+  screen: string;
+  icon: string;
+  iconHover: string;
+  primaryFont: string;
+  primaryBorder: string;
 };
 
 type themesObj = { blue: subThemes; red: subThemes };
@@ -15,17 +20,27 @@ export const themes: themesObj = {
   blue: {
     white: "#ffffff",
     black: "#000000",
-    primary: "#5145e7",
-    primaryHover: "#3d34c0",
-    dark: "#2119b3",
-    darkHover: "#151070",
+    primary: "#283669",
+    primaryHover: "#1b295e",
+    primaryDark: "#1b295e",
+    primaryDarkHover: "#101b3c",
+    screen: "#0f172a",
+    icon: "#283669",
+    iconHover: "#1b295e",
+    primaryFont: "#ffffff",
+    primaryBorder: "#ffffff",
   },
   red: {
     white: "#ffffff",
     black: "#000000",
     primary: "#ff1a1a",
     primaryHover: "#b30000",
-    dark: "#cc0000",
-    darkHover: "#4d0000",
+    primaryDark: "#b30000",
+    primaryDarkHover: "#660000",
+    screen: "#1a0000",
+    icon: "#b30000",
+    iconHover: "#1b295e",
+    primaryFont: "#ffffff",
+    primaryBorder: "#ffffff",
   },
 };

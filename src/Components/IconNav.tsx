@@ -5,33 +5,45 @@ import { IoMdColorPalette } from "react-icons/io";
 import { Link } from "react-router-dom";
 import ProContext from "../context/mainContext";
 
-const Iconnav = (props) => {
-
-  const context: any = useContext(ProContext);
-
-  const [colorTheme, setColorTheme] = useState(context.currentTheme);
-
-  useMemo(() => {
-    setColorTheme(context.currentTheme);
-  }, [context.currentTheme]);
+const Iconnav: React.FC<{}> = (props) => {
+  const { theme }: any = useContext(ProContext);
 
   return (
-    <div className="h-screen flex items-center z-50">
+    <div
+      className="h-full justify-center flex items-center z-50"
+      style={{
+        backgroundColor: theme.primary,
+      }}
+    >
       <ul
-        className={`h-[95%] flex flex-col justify-evenly py-2 px-2 rounded-2xl backdrop-blur-md ${colorTheme.main}`}
+        className="h-[95%] flex flex-col justify-evenly p-2 rounded-2xl"
+        style={{
+          backgroundColor: theme.primaryDark,
+        }}
       >
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <div
             className="text-[35px] text-white cursor-pointer relative"
             onClick={() => {
-              props.setNotificationBarStatus(true);
+              // props.setNotificationBarStatus(true);
             }}
           >
-            {props.notificationCount > 0 && (
+            {/* {props.notificationCount > 0 && (
               <span className="text-[12px] font-semibold w-6 h-6 bg-blue-500 rounded-full flex justify-center items-center absolute -top-2 -right-2 transition-all duration-300 ease-in-out">
                 {props.notificationCount}
               </span>
-            )}
+            )} */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -48,25 +60,49 @@ const Iconnav = (props) => {
             </svg>
           </div>
         </li>
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <div
             className="text-[35px] text-white cursor-pointer relative"
             onClick={() => {
-              props.setFindFriendScreenStatus(true);
+              // props.setFindFriendScreenStatus(true);
             }}
           >
-            {props.notificationCount > 0 && (
+            {/* {props.notificationCount > 0 && ( */}
+            {true && (
               <span className="text-[12px] font-semibold w-6 h-6 bg-blue-500 rounded-full flex justify-center items-center absolute -top-2 -right-2 transition-all duration-300 ease-in-out">
-                {props.notificationCount}
+                {/* {props.notificationCount} */}
+                {1}
               </span>
             )}
             <AiOutlineUserAdd />
           </div>
         </li>
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <div
             onClick={() => {
-              props.setModalOpen(true);
+              // props.setModalOpen(true);
             }}
             className="text-[35px] text-white cursor-pointer"
           >
@@ -87,15 +123,26 @@ const Iconnav = (props) => {
           </div>
           {/* </a> */}
         </li>
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <span
             className="text-[35px] text-white cursor-pointer"
             onClick={() => {
-              window.innerWidth >= 1024
-                ? props.setChatList(true)
-                : props.chatList === true
-                ? props.setChatList(false)
-                : props.setChatList(true);
+              // window.innerWidth >= 1024
+              //   ? props.setChatList(true)
+              //   : props.chatList === true
+              //   ? props.setChatList(false)
+              //   : props.setChatList(true);
             }}
           >
             <svg
@@ -114,17 +161,39 @@ const Iconnav = (props) => {
             </svg>
           </span>
         </li>
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <div
             onClick={() => {
-              props.setThemePageModalStatus(true);
+              // props.setThemePageModalStatus(true);
             }}
             className="text-[35px] text-white cursor-pointer"
           >
             <IoMdColorPalette className="w-9 h-9" />
           </div>
         </li>
-        <li className={`p-2 rounded-lg ${colorTheme.iconHover}`}>
+        <li
+          className="p-2 rounded-lg"
+          style={{
+            backgroundColor: theme.primaryDark,
+          }}
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+          }}
+          onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+            e.currentTarget.style.backgroundColor = theme.primaryDark;
+          }}
+        >
           <Link
             to={"/auth"}
             onClick={() => localStorage.clear()}

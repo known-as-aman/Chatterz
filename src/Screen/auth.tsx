@@ -22,7 +22,6 @@ import { subThemes, themes } from "../Data/color_theme";
 
 const Auth = () => {
   const navigate: NavigateFunction = useNavigate();
-  const { theme, themeSelector }: any = useContext(ProContext);
 
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [name, setName] = useState<string>("");
@@ -222,8 +221,6 @@ const Auth = () => {
                   src={"/assets/images/iChat-logo.png"}
                   alt="iChat"
                   className="w-20 h-20"
-                  // to be remove
-                  onClick={()=>{themeSelector("red")}}
                 />
                 <h1
                   className={`text-center text-2xl sm:text-3xl font-semibold fontUbuntu`}
@@ -238,11 +235,11 @@ const Auth = () => {
                   onClick={() => {
                     setTab("signup");
                   }}
-                  className="transition-all duration-100 w-1/3 pb-4 font-medium text-center text-gray-500 cursor-pointer outline-none border-b-2"
-                  style={{
-                    color: tab === "signup" ? "#111827" : "#9CA3AF",
-                    borderColor: tab === "signup" ? theme.primary : ""
-                  }}
+                  className={`transition-all duration-100 w-1/3 pb-4 font-medium text-center text-gray-500 cursor-pointer outline-none border-b-2 ${
+                    tab === "signup"
+                      ? "text-[#111827] border-[#5145e7]"
+                      : "text-[#9CA3AF]"
+                  }`}
                 >
                   Register
                 </button>
@@ -252,11 +249,11 @@ const Auth = () => {
                   onClick={() => {
                     setTab("signin");
                   }}
-                  className="transition-all duration-100 w-1/3 pb-4 font-medium text-center cursor-pointer outline-none border-b-2"
-                  style={{
-                    color: tab === "signin" ? "#111827" : "#9CA3AF",
-                    borderColor: tab === "signin" ? theme.primary : ""
-                  }}
+                  className={`transition-all duration-100 w-1/3 pb-4 font-medium text-center cursor-pointer outline-none border-b-2  ${
+                    tab === "signin"
+                      ? "text-[#111827] border-[#5145e7]"
+                      : "text-[#9CA3AF]"
+                  }`}
                 >
                   Login
                 </button>
@@ -353,18 +350,8 @@ const Auth = () => {
 
               <div className="mt-6">
                 <button
-                  className="w-full px-6 py-3 text-sm font-medium tracking-wide outline-none transform  rounded-lg hover:shadow-2xl transition-all duration-200 ease-in-out"
+                  className="w-full px-6 py-3 text-sm font-medium tracking-wide outline-none transform  rounded-lg hover:shadow-2xl transition-all duration-200 ease-in-out bg-[#5145e7] hover:bg-[#3d34c0] text-white"
                   type="submit"
-                  style={{
-                    background: theme.primary,
-                    color: theme.white,
-                  }}
-                  onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    e.currentTarget.style.background = theme.primaryHover;
-                  }}
-                  onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    e.currentTarget.style.background = theme.primary;
-                  }}
                 >
                   {tab === "signin" ? "Login" : "Register"}
                 </button>
@@ -373,10 +360,7 @@ const Auth = () => {
                     <span className="text-sm ">
                       Already have an account?
                       <span
-                        className="font-semibold hover:underline ml-1 cursor-pointer"
-                        style={{
-                          color: theme.primary
-                        }}
+                        className="font-semibold hover:underline ml-1 cursor-pointer text-[#5145e7]"
                         onClick={() => {
                           setTab("signin");
                         }}

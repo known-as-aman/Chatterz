@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FocusEvent, useContext, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   componentInputBox_i,
   inputTypeInterface_i,
@@ -6,26 +12,25 @@ import {
 import ProContext from "../../context/mainContext";
 
 const Input = (props: inputTypeInterface_i) => {
-
   const { themeName }: any = useContext(ProContext);
   const classes = {
     blue: {
-        afterBg: "after:bg-[#5145e7]",
-      },
+      afterBg: "after:bg-[#5145e7]",
+    },
     red: {
-        afterBg: "after:bg-[#ff1a1a]",
+      afterBg: "after:bg-[#ff1a1a]",
     },
   };
 
-  const [currentSet,setCurrentSet] = useState(classes.blue);
+  const [currentSet, setCurrentSet] = useState(classes.blue);
 
-  useEffect(()=>{
-    if(themeName === "blue"){
+  useEffect(() => {
+    if (themeName === "blue") {
       setCurrentSet(classes.blue);
-    }else if(themeName === "red"){
+    } else if (themeName === "red") {
       setCurrentSet(classes.red);
     }
-  },[themeName]);
+  }, [themeName]);
 
   const focusHandler = (e: FocusEvent<HTMLInputElement>) => {
     let parentElement: HTMLElement = e.target.parentElement as HTMLElement;
@@ -135,9 +140,9 @@ const Input = (props: inputTypeInterface_i) => {
 
         return (
           <div
-            className={`relative after:content-[''] after:absolute after:top-full after:left-0 after:w-0 after:h-0.5 after:rounded-xl after:mx-auto after:transition-all after:duration-300 after:ease-in-out border-b-2 border-gray-200 ${currentSet.afterBg} ${
-              props.extraClass ? props.extraClass : ""
-            }`}
+            className={`relative after:content-[''] after:absolute after:top-full after:left-0 after:w-0 after:h-0.5 after:rounded-xl after:mx-auto after:transition-all after:duration-300 after:ease-in-out border-b-2 border-gray-200 ${
+              currentSet.afterBg
+            } ${props.extraClass ? props.extraClass : ""}`}
           >
             <input
               type={props.type ? props.type : "text"}

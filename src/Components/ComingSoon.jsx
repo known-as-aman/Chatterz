@@ -1,7 +1,7 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { commingSoonModal_i } from '../interface/component_interface';
+import { commingSoonModal_i } from '../interface/icons_interface';
 
 const CommingSoonModal = (props) => {
 
