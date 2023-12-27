@@ -15,6 +15,12 @@ module.exports = {
       colors: {
         'regal-blue': '#243c5a',
       },
+      maxWidth: {
+        '1/2': '50%',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
   plugins: [],

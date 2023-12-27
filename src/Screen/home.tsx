@@ -2,8 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ProContext from "../context/mainContext";
 import Iconnav from "../Components/IconNav";
-import SvgIcon from "../Components/icons/svgIcons";
-import Input from "../Components/SubComponents/InputBox";
+import SvgIcon from "../Components/Icons/svgIcons";
+import Message from "../Components/Message";
+import { componentFile_i } from "../interface/component_select";
+import OpenImage from "../Components/OpenImage";
+import NotificationBox from "../Components/NotificationBox";
+import Connection from "./Connections";
+import Themes from "../Components/Modals/Theme";
 
 const data = [
   {
@@ -41,14 +46,165 @@ const data = [
     username: "Amanda_kapti",
     img: "/person_1.webp",
   },
+  {
+    name: "Amanda Kapti",
+    username: "Amanda_kapti",
+    img: "/person_1.webp",
+  },
+  {
+    name: "Amanda Kapti",
+    username: "Amanda_kapti",
+    img: "/person_1.webp",
+  },
+  {
+    name: "Amanda Kapti",
+    username: "Amanda_kapti",
+    img: "/person_1.webp",
+  },
+  {
+    name: "Amanda Kapti",
+    username: "Amanda_kapti",
+    img: "/person_1.webp",
+  },
+  {
+    name: "Amanda Kapti",
+    username: "Amanda_kapti",
+    img: "/person_1.webp",
+  },
+];
+
+const msgData = [
+  {
+    messageId: 1,
+    ownerEmail: "sender@email.com",
+    senderEmail: "sender@email.com",
+    receiverEmail: "receiver@email.com",
+    messageType: "image",
+    messageText: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    messageReplied: false,
+    messageEdited: false,
+    fileUrl: ["/person_2.jpg"],
+    creationTime: Date.now(),
+    creationBy: "sender@email.com",
+    updationTime: Date.now(),
+    updationBy: "sender@email.com",
+  },
+  {
+    messageId: 2,
+    ownerEmail: "receiver@email.com",
+    senderEmail: "receiver@email.com",
+    receiverEmail: "sender@email.com",
+    messageType: "text",
+    messageText:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, iusto blanditiis. Perspiciatis, quos nostrum!",
+    messageReplied: false,
+    messageEdited: false,
+    fileUrl: [],
+    creationTime: Date.now(),
+    creationBy: "sender@email.com",
+    updationTime: Date.now(),
+    updationBy: "sender@email.com",
+  },
+  {
+    messageId: 3,
+    ownerEmail: "sender@email.com",
+    senderEmail: "sender@email.com",
+    receiverEmail: "receiver@email.com",
+    messageType: "text",
+    messageText: "Lorem ipsum dolor sit",
+    messageReplied: false,
+    messageEdited: false,
+    fileUrl: [],
+    creationTime: Date.now(),
+    creationBy: "sender@email.com",
+    updationTime: Date.now(),
+    updationBy: "sender@email.com",
+  },
+  {
+    messageId: 4,
+    ownerEmail: "receiver@email.com",
+    senderEmail: "receiver@email.com",
+    receiverEmail: "sender@email.com",
+    messageType: "multiple_image",
+    messageText: "Lorem ipsum dolor sit",
+    messageReplied: false,
+    messageEdited: false,
+    // fileUrl: ["/person_2.jpg","/person_1.webp"],
+    // fileUrl: ["/person_2.jpg","/person_1.webp","/no_user_profile.png"],
+    fileUrl: [
+      "/person_2.jpg",
+      "/person_1.webp",
+      "/no_user_profile.png",
+      "/person_1.webp",
+      "/no_user_profile.png",
+    ],
+    creationTime: Date.now(),
+    creationBy: "sender@email.com",
+    updationTime: Date.now(),
+    updationBy: "sender@email.com",
+  },
+  {
+    messageId: 5,
+    ownerEmail: "sender@email.com",
+    senderEmail: "sender@email.com",
+    receiverEmail: "receiver@email.com",
+    messageType: "text",
+    messageText:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, iusto blanditiis. Perspiciatis, quos nostrum! Facilis illo ratione deleniti nisi odio eaque commodi accusamus iure architecto nobis! Cumque ratione delectus quibusdam?  Deserunt, iusto blanditiis. Perspiciatis, quos nostrum! Facilis illo ratione deleniti nisi odio eaque commodi accusamus iure architecto nobis! Cumque ratione delectus quibusdam?",
+    messageReplied: false,
+    messageEdited: false,
+    fileUrl: [],
+    creationTime: Date.now(),
+    creationBy: "sender@email.com",
+    updationTime: Date.now(),
+    updationBy: "sender@email.com",
+  },
 ];
 
 const Home = () => {
   const navigate = useNavigate();
-  const { theme, themeSelector }: any = useContext(ProContext);
+
+  const { theme, themeSelector, imageData, imageOpen, setImageOpen }: any =
+    useContext(ProContext);
+
+  const myInfo = {
+    id: 28112003,
+    email: "sender@email.com",
+  };
+
+  const [notificationData, setNotificationData]: Array<any> = useState([
+    {
+      id: 1,
+      name: "Jhamunda Kapti",
+      username: "jhamunda_kapti",
+      message: "It will take some time, but you need to keep patience.",
+    },
+    {
+      id: 2,
+      name: "Bhandari Kapti",
+      username: "bhandari_kapti",
+      message: "It will take some time, you can give up, if you're a looser.",
+    },
+  ]);
 
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
+  const [notificationOpen, setNotificationOpen] = useState<boolean>(false);
+  const [themeOpen, setThemeOpen] = useState<boolean>(false);
+  const [connectionBarOpen, setConnectionBarOpen] = useState<boolean>(false);
   const [currentMessage, setCurrentMessage] = useState<string>("");
+  const [fileType, setFileType] = useState<componentFile_i>("");
+
+  useEffect(() => {
+    setFileType(getFileType_f());
+  }, [imageData]);
+
+  const getFileType_f = () => {
+    if (imageData.length > 1) {
+      return "multiple_image";
+    } else {
+      return "image";
+    }
+  };
 
   const sendMessageHandler = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,22 +215,22 @@ const Home = () => {
       <div className="flex w-full h-full">
         {/* CHAT LIST START */}
         <div
-          className="w-[400px] h-full flex"
+          className={`w-[400px] h-full flex absolute transition-all duration-500 ease-in-out lg:static z-30 top-0 ${connectionBarOpen ? "left-0" : "-left-[400px]"}`}
           style={{
             background: theme.primary,
           }}
         >
           <div className="w-[80px] h-full">
-            <Iconnav />
+            <Iconnav
+              setNotificationOpen={setNotificationOpen}
+              notificationCount={notificationData.length}
+              setThemeOpen={setThemeOpen}
+            />
           </div>
 
-          <div className="w-[320px] h-full py-2 flex flex-col pl-2">
+          <div className="w-[320px] h-full py-2 flex flex-col pl-2 relative">
             <div
-              className="flex items-center py-2"
-              onClick={() => {
-                themeSelector("red");
-                // to be remove
-              }}
+              className="flex items-center py-2 relative"
             >
               <span
                 className="font-semibold text-[26px]"
@@ -91,6 +247,23 @@ const Home = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
+
+              <button type="button" className="p-2 rounded-full absolute top-1/2 -translate-y-[50%] right-4 lg:hidden block"
+              style={{
+                color:theme.primaryFont
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+                e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
+              }}
+            onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+              onClick={()=>{
+                setConnectionBarOpen(false);
+              }}
+              >
+                <SvgIcon name="cross" classes="w-8 h-8" />
+              </button>
             </div>
             <div className="flex py-2 items-center">
               <div className="w-full">
@@ -117,8 +290,8 @@ const Home = () => {
                 <SvgIcon name="magnify_glass" />
               </button>
             </div>
-            <div className="py-2 pr-2">
-              <div className="pr-2 overflow-y-auto h-[calc(100%-170px)] shadow-[inset_0_10px_10px_rgba(0_0_0_0.5)]">
+            <div className="py-2 pr-2 h-[calc(100%-126px)]">
+              <div className="pr-2 overflow-y-auto h-full shadow-[inset_0_10px_10px_rgba(0_0_0_0.5)]">
                 <ul className="flex flex-col h-full rounded-lg">
                   {data.map((item, idx) => (
                     <li
@@ -162,9 +335,8 @@ const Home = () => {
 
         {/* CHAT SCREEN START */}
         <div
-          className="h-full bg-black pl-0.5 transition-all duration-500 ease-in-out"
+          className={`h-full bg-black pl-0.5 transition-all duration-500 ease-in-out w-full ${profileOpen ? "lg:w-[calc(100%-800px)]" : "lg:w-[calc(100%-400px)]"} ${connectionBarOpen ? "blur-sm lg:blur-none" : "blur-none"}`}
           style={{
-            width: profileOpen ? "calc(100% - 800px)" : "calc(100% - 400px)",
             backgroundColor: theme.screen,
           }}
         >
@@ -177,8 +349,15 @@ const Home = () => {
               }}
             >
               <div className="w-full h-full flex justify-between items-center">
-                <div className="flex">
-                  <div className="w-16 h-16 rounded-full cursor-pointer">
+                <div className="flex items-center">
+                  <button type="button" className="h-full text-white lg:hidden block" onClick={()=>{
+                    if(window.innerWidth <= 1024){
+                      setConnectionBarOpen(true);
+                    }
+                  }}>
+                    <SvgIcon name="menu" classes="w-8 h-8" />
+                  </button>
+                  <div className="w-16 h-16 rounded-full cursor-pointer lg:ml-0 ml-6">
                     <img
                       src="/person_1.webp"
                       alt="Chatterz"
@@ -223,8 +402,47 @@ const Home = () => {
             {/* SCREEN HEADER END */}
 
             {/* CHAT SECTION START */}
-            <div className="h-[calc(100%-180px)] px-8">
-              <div className="bg-green-500 w-full h-full"></div>
+            <div className="h-[calc(100%-180px)] px-8 overflow-y-auto">
+              <div className="border-none border-green-500 w-full h-full flex flex-col">
+                {msgData.map((item) => (
+                  <div
+                    className={`relative rounded-md mb-4 px-2 py-0.5 ${
+                      profileOpen ? "max-w-[95%]" : "max-w-[75%]"
+                    } ${
+                      myInfo.email === item.senderEmail ? "ml-auto" : "mr-auto"
+                    }`}
+                    style={{
+                      backgroundColor:
+                        myInfo.email === item.senderEmail
+                          ? theme.primary
+                          : theme.white,
+                      color:
+                        myInfo.email === item.senderEmail
+                          ? theme.primaryFont
+                          : theme.secondaryFont,
+                    }}
+                    key={item.messageId}
+                  >
+                    <Message
+                      compType={item.messageType}
+                      text={item.messageText}
+                      fileUrl={item.fileUrl}
+                    />
+
+                    {myInfo.email !== item.senderEmail && (
+                      <span className="absolute bottom-0.5 -left-0.5 h-2 w-2 border-t-[10px] border-l-[10px] border-white rotate-45"></span>
+                    )}
+                    {myInfo.email === item.senderEmail && (
+                      <span
+                        className="absolute bottom-0.5 -right-0.5 h-2 w-2 border-t-[10px] border-l-[10px] rotate-45"
+                        style={{
+                          borderColor: theme.primary,
+                        }}
+                      ></span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
             {/* CHAT SECTION END */}
 
@@ -306,6 +524,7 @@ const Home = () => {
             {/* MESSAGE SEND SECTION START */}
           </div>
         </div>
+
         {/* CHAT SCREEN END */}
 
         {/* PROFILE SCREEN START */}
@@ -320,6 +539,47 @@ const Home = () => {
         ></div>
         {/* PROFILE SCREEN END */}
       </div>
+
+      {/* ABSOLUTE MODALS START */}
+
+      {/* Open image file */}
+      {imageOpen && (
+        <div className="fixed top-0 left-0 w-full h-full z-50">
+          <div className="relative w-full h-full flex justify-center items-center bg-[rgba(0,0,0,0.8)]">
+            <OpenImage fileType={fileType} fileData={imageData} />
+            <button
+              type="button"
+              className="absolute top-2 right-2 p-2 rounded-lg bg-gray-600 hover:bg-slate-700 transition-all duration-300 ease-in-out"
+              onClick={() => {
+                setImageOpen(false);
+              }}
+            >
+              <SvgIcon name="cross" classes="w-8 h-8 text-white" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Open notification bar */}
+      <div
+        className={`fixed h-screen w-full sm:w-96 transition-all duration-500 ease-in-out z-50 top-0 ${
+          notificationOpen ? "right-0" : "-right-full sm:-right-96"
+        }`}
+      >
+        <div className="relative w-full h-full flex justify-center items-center bg-[rgba(0,0,0,0.9)] px-4">
+          <NotificationBox
+            data={notificationData}
+            setData={setNotificationData}
+            setOpen={setNotificationOpen}
+          />
+        </div>
+      </div>
+
+      <div className="">
+        <Themes open={themeOpen} setOpen={setThemeOpen} />
+      </div>
+
+      {/* ABSOLUTE MODALS END */}
     </section>
   );
 };

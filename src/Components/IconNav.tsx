@@ -1,12 +1,20 @@
 import { useContext, useMemo, useState } from "react";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 import { CiLogout } from "react-icons/ci";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { IoMdColorPalette } from "react-icons/io";
 import { Link } from "react-router-dom";
 import ProContext from "../context/mainContext";
+import { iconNavInterface_i } from "../interface/component_select";
+import SvgIcon from "./Icons/svgIcons";
 
-const Iconnav: React.FC<{}> = (props) => {
+const Iconnav: React.FC<iconNavInterface_i> = ({
+  setNotificationOpen,
+  notificationCount,
+  setThemeOpen
+}) => {
   const { theme }: any = useContext(ProContext);
+  const navigate: NavigateFunction = useNavigate();
 
   return (
     <div
@@ -36,28 +44,15 @@ const Iconnav: React.FC<{}> = (props) => {
           <div
             className="text-[35px] text-white cursor-pointer relative"
             onClick={() => {
-              // props.setNotificationBarStatus(true);
+              setNotificationOpen(true);
             }}
           >
-            {/* {props.notificationCount > 0 && (
+            {notificationCount > 0 && (
               <span className="text-[12px] font-semibold w-6 h-6 bg-blue-500 rounded-full flex justify-center items-center absolute -top-2 -right-2 transition-all duration-300 ease-in-out">
-                {props.notificationCount}
+                {notificationCount}
               </span>
-            )} */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-9 h-9"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-              />
-            </svg>
+            )}
+            <SvgIcon name="bell" classes="w-9 h-9" />
           </div>
         </li>
         <li
@@ -74,10 +69,8 @@ const Iconnav: React.FC<{}> = (props) => {
         >
           <div
             className="text-[35px] text-white cursor-pointer relative"
-            onClick={() => {
-              // props.setFindFriendScreenStatus(true);
-            }}
           >
+            <Link to={"/connection"}>
             {/* {props.notificationCount > 0 && ( */}
             {true && (
               <span className="text-[12px] font-semibold w-6 h-6 bg-blue-500 rounded-full flex justify-center items-center absolute -top-2 -right-2 transition-all duration-300 ease-in-out">
@@ -86,9 +79,11 @@ const Iconnav: React.FC<{}> = (props) => {
               </span>
             )}
             <AiOutlineUserAdd />
+            </Link>
           </div>
         </li>
-        <li
+
+        {/* <li
           className="p-2 rounded-lg"
           style={{
             backgroundColor: theme.primaryDark,
@@ -102,7 +97,7 @@ const Iconnav: React.FC<{}> = (props) => {
         >
           <div
             onClick={() => {
-              // props.setModalOpen(true);
+              
             }}
             className="text-[35px] text-white cursor-pointer"
           >
@@ -121,8 +116,8 @@ const Iconnav: React.FC<{}> = (props) => {
               />
             </svg>
           </div>
-          {/* </a> */}
-        </li>
+        </li> */}
+
         <li
           className="p-2 rounded-lg"
           style={{
@@ -171,11 +166,11 @@ const Iconnav: React.FC<{}> = (props) => {
           }}
           onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
             e.currentTarget.style.backgroundColor = theme.primaryDark;
-          }}
+          }}        
         >
           <div
             onClick={() => {
-              // props.setThemePageModalStatus(true);
+              setThemeOpen(true);
             }}
             className="text-[35px] text-white cursor-pointer"
           >

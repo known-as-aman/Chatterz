@@ -3,7 +3,14 @@ type svgIconsName =
   | "three_dot_menu"
   | "send_paper_plane"
   | "document_plus"
-  | "emoji_happy";
+  | "emoji_happy"
+  | "plus"
+  | "cross"
+  | "greater_than"
+  | "lesser_than"
+  | "bell"
+  | "left_arrow"
+  | "menu";
 
 export interface svgIcons_i {
   name: svgIconsName;

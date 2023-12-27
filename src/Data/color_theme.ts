@@ -11,10 +11,11 @@ export type subThemes = {
   icon: string;
   iconHover: string;
   primaryFont: string;
+  secondaryFont: string,
   primaryBorder: string;
 };
 
-type themesObj = { blue: subThemes; red: subThemes };
+export type themesObj = { blue: subThemes; red: subThemes };
 
 export const themes: themesObj = {
   blue: {
@@ -28,6 +29,7 @@ export const themes: themesObj = {
     icon: "#283669",
     iconHover: "#1b295e",
     primaryFont: "#ffffff",
+    secondaryFont: "#283669",
     primaryBorder: "#ffffff",
   },
   red: {
@@ -41,6 +43,7 @@ export const themes: themesObj = {
     icon: "#b30000",
     iconHover: "#1b295e",
     primaryFont: "#ffffff",
+    secondaryFont: "#ff1a1a",
     primaryBorder: "#ffffff",
   },
 };

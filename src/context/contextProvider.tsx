@@ -50,17 +50,19 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const [themeName, setThemeName] = useState<themesColor>("blue");
   const [theme, setTheme] = useState<subThemes>(colorPallete.blue);
+  const [imageData, setImageData] = useState<Array<string>>([]);
+  const [imageOpen, setImageOpen] = useState<boolean>(false);
 
   const themeSelector = (themeIndex: themesColor) => {
     switch (themeIndex) {
       case "blue": {
-        setThemeName("blue")
+        setThemeName("blue");
         setTheme(colorPallete.blue);
         break;
       }
 
       case "red": {
-        setThemeName("red")
+        setThemeName("red");
         setTheme(colorPallete.red);
         break;
       }
@@ -75,7 +77,11 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const contextValues: context_i = {
     themeName,
     theme,
-    themeSelector
+    themeSelector,
+    imageData,
+    setImageData,
+    imageOpen,
+    setImageOpen
   };
 
   return (
