@@ -215,7 +215,9 @@ const Home = () => {
       <div className="flex w-full h-full">
         {/* CHAT LIST START */}
         <div
-          className={`w-[400px] h-full flex absolute transition-all duration-500 ease-in-out lg:static z-30 top-0 ${connectionBarOpen ? "left-0" : "-left-[400px]"}`}
+          className={`w-[400px] h-full flex absolute transition-all duration-500 ease-in-out lg:static z-30 top-0 ${
+            connectionBarOpen ? "left-0" : "-left-[400px]"
+          }`}
           style={{
             background: theme.primary,
           }}
@@ -229,9 +231,7 @@ const Home = () => {
           </div>
 
           <div className="w-[320px] h-full py-2 flex flex-col pl-2 relative">
-            <div
-              className="flex items-center py-2 relative"
-            >
+            <div className="flex items-center py-2 relative">
               <span
                 className="font-semibold text-[26px]"
                 style={{
@@ -248,19 +248,22 @@ const Home = () => {
                 />
               </div>
 
-              <button type="button" className="p-2 rounded-full absolute top-1/2 -translate-y-[50%] right-4 lg:hidden block"
-              style={{
-                color:theme.primaryFont
-              }}
-              onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
-                e.currentTarget.style.backgroundColor = theme.primaryDarkHover;
-              }}
-            onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
-              onClick={()=>{
-                setConnectionBarOpen(false);
-              }}
+              <button
+                type="button"
+                className="p-2 rounded-full absolute top-1/2 -translate-y-[50%] right-4 lg:hidden block"
+                style={{
+                  color: theme.primaryFont,
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+                  e.currentTarget.style.backgroundColor =
+                    theme.primaryDarkHover;
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
+                onClick={() => {
+                  setConnectionBarOpen(false);
+                }}
               >
                 <SvgIcon name="cross" classes="w-8 h-8" />
               </button>
@@ -335,7 +338,9 @@ const Home = () => {
 
         {/* CHAT SCREEN START */}
         <div
-          className={`h-full bg-black pl-0.5 transition-all duration-500 ease-in-out w-full ${profileOpen ? "lg:w-[calc(100%-800px)]" : "lg:w-[calc(100%-400px)]"} ${connectionBarOpen ? "blur-sm lg:blur-none" : "blur-none"}`}
+          className={`h-full bg-black pl-0.5 transition-all duration-500 ease-in-out w-full ${
+            profileOpen ? "lg:w-[calc(100%-800px)]" : "lg:w-[calc(100%-400px)]"
+          } ${connectionBarOpen ? "blur-sm lg:blur-none" : "blur-none"}`}
           style={{
             backgroundColor: theme.screen,
           }}
@@ -350,11 +355,15 @@ const Home = () => {
             >
               <div className="w-full h-full flex justify-between items-center">
                 <div className="flex items-center">
-                  <button type="button" className="h-full text-white lg:hidden block" onClick={()=>{
-                    if(window.innerWidth <= 1024){
-                      setConnectionBarOpen(true);
-                    }
-                  }}>
+                  <button
+                    type="button"
+                    className="h-full text-white lg:hidden block"
+                    onClick={() => {
+                      if (window.innerWidth <= 1024) {
+                        setConnectionBarOpen(true);
+                      }
+                    }}
+                  >
                     <SvgIcon name="menu" classes="w-8 h-8" />
                   </button>
                   <div className="w-16 h-16 rounded-full cursor-pointer lg:ml-0 ml-6">
@@ -364,6 +373,7 @@ const Home = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
+
                   <div
                     className="flex flex-col justify-center ml-5 cursor-pointer"
                     onClick={() => {
@@ -524,19 +534,102 @@ const Home = () => {
             {/* MESSAGE SEND SECTION START */}
           </div>
         </div>
-
         {/* CHAT SCREEN END */}
 
         {/* PROFILE SCREEN START */}
         <div
-          className="h-full bg-yellow-800 transition-all duration-500 ease-in-out"
+          className="h-full transition-all duration-500 ease-in-out"
           style={{
             width: profileOpen ? "400px" : "0px",
+            paddingLeft: profileOpen ? "2px" : "0",
+            backgroundColor: theme.screen,
           }}
-          onClick={() => {
-            setProfileOpen(false);
-          }}
-        ></div>
+        >
+          <div
+            className="w-full h-[80px] px-4 flex items-center"
+            style={{
+              backgroundColor: theme.primary,
+              color: theme.primaryFont,
+            }}
+          >
+            <button
+              type="button"
+              className="h-10 w-10 flex justify-center items-center rounded-md"
+              onClick={() => {
+                setProfileOpen(false);
+              }}
+              onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.currentTarget.style.backgroundColor = theme.primaryHover;
+              }}
+              onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.currentTarget.style.backgroundColor = theme.primary;
+              }}
+            >
+              <SvgIcon
+                name="cross"
+                classes="w-7 h-7 text-gray-200 hover:text-white"
+              />
+            </button>
+            <span className="ml-2 text-xl">Contact</span>
+          </div>
+
+          <div className="flex flex-col gap-4 items-center justify-start h-[calc(100%-80px)] overflow-y-auto pb-10">
+            <div className="text-white rounded-lg shadow-md py-6 w-full">
+              <div className="flex items-center justify-center mb-4">
+                <img
+                  src="/person_1.webp"
+                  alt="Chatterz"
+                  className="w-44 h-44 rounded-full object-cover"
+                />
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-semibold">John Doe</p>
+                <p className="text-md text-gray-400">john.doe@example.com</p>
+              </div>
+            </div>
+
+            <div
+              className="w-full max-h-[150px] px-4 py-1 flex flex-col"
+              style={{
+                backgroundColor: theme.primary,
+                color: theme.primaryFont,
+              }}
+            >
+              <div
+                className="w-full py-1 font-semibold"
+                style={{ color: theme.primaryFont }}
+              >
+                Bio
+              </div>
+              <div className="w-full py-1 text-gray-300">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+                possimus!
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="w-full py-4 px-4 text-lg font-medium tracking-wide flex gap-2 justify-start items-center cursor-pointer"
+              style={{
+                backgroundColor: theme.primary,
+                color: theme.primaryFont,
+              }}
+            >
+              <SvgIcon name="block" /> <span>Block</span>
+            </button>
+
+            <button
+              type="button"
+              className="w-full py-4 px-4 text-lg font-medium tracking-wide flex gap-2 justify-start items-center cursor-pointer"
+              style={{
+                backgroundColor: theme.primary,
+                color: theme.primaryFont,
+              }}
+            >
+              <SvgIcon name="bin" /> <span>Delete</span>
+            </button>
+          </div>
+        </div>
         {/* PROFILE SCREEN END */}
       </div>
 

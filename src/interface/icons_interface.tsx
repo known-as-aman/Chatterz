@@ -10,7 +10,9 @@ type svgIconsName =
   | "lesser_than"
   | "bell"
   | "left_arrow"
-  | "menu";
+  | "menu"
+  | "block"
+  | "bin";
 
 export interface svgIcons_i {
   name: svgIconsName;
